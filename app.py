@@ -32,7 +32,7 @@ sidebar_state = render_sidebar()
 image = load_input_image(sidebar_state["uploaded_file"], sidebar_state["use_demo_image"])
 
 tab_demo, tab_analysis, tab_explanation = st.tabs(
-    ["Demo", "Analysis", "Explanation"]
+    ["Pipeline Demo", "Security Analysis", "The Paper"]
 )
 
 with tab_demo:

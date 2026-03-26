@@ -36,9 +36,11 @@ def render_analysis_tab(
     )
 
     st.markdown('<div class="panel-card">', unsafe_allow_html=True)
-    st.markdown('<div class="section-title">Technical analysis</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Security metrics</div>', unsafe_allow_html=True)
     st.markdown(
-        '<div class="section-copy">This panel communicates visual disruption, entropy shift, and structural change, making the demo feel more engineering-driven and less like a static mockup.</div>',
+        '<div class="section-copy">Standard cryptographic quality indicators measured on your image. '
+        'Strong encryption raises entropy toward 8.0 bits, keeps PSNR low (high distortion from original), '
+        'and flattens the histogram so no intensity value is predictable.</div>',
         unsafe_allow_html=True,
     )
     st.markdown("</div>", unsafe_allow_html=True)
@@ -76,7 +78,16 @@ def render_analysis_tab(
         ax2.legend()
         st.pyplot(fig2, width="stretch")
 
-    st.markdown("### Interpretation")
-    st.write(
-        "The analysis is meant to show that the protected output is visually and statistically different enough to support a strong privacy narrative, while keeping the interface understandable to non-cryptography audiences."
+    st.markdown("### Reading these metrics")
+    st.markdown(
+        "- **Entropy** measures information density per pixel. A natural image scores ~7.0–7.5 bits; "
+        "a well-encrypted image should reach ~7.9–8.0 bits as pixel values become statistically uniform.\n"
+        "- **MSE** (Mean Squared Error) measures average pixel-level deviation. High MSE means the encrypted output "
+        "is far from the original — which is what encryption is supposed to do.\n"
+        "- **PSNR** (Peak Signal-to-Noise Ratio) is the inverse: low PSNR means high distortion. "
+        "For encryption, low PSNR between input and encrypted is a good sign.\n"
+        "- **Edge density** drops after encryption because spatial structure is destroyed — "
+        "edges only exist when neighboring pixels are correlated.\n"
+        "- The **histogram** of the encrypted image should be flat: every intensity value should appear with roughly equal frequency, "
+        "which is the visual signature of a well-diffused ciphertext."
     )

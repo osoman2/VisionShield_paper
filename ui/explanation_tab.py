@@ -3,7 +3,7 @@ from __future__ import annotations
 import streamlit as st
 
 from core.config import APP_DESCRIPTION, PAPER_TITLE, PAPER_URL
-from core.flow_content import DISRUPTIVE_ANGLE, FLOW_STAGES, USE_CASES
+from core.flow_content import ADAPTATION_NOTES, FLOW_STAGES, USE_CASES
 
 _NODE_LABELS: dict[str, str] = {
     "Input":   "⬡  Input",
@@ -16,7 +16,7 @@ _NODE_LABELS: dict[str, str] = {
 
 def render_explanation_tab() -> None:
     st.markdown('<div class="panel-card">', unsafe_allow_html=True)
-    st.markdown('<div class="section-title">Explanation workspace</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">The paper and the adaptation</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="section-copy">{APP_DESCRIPTION}</div>', unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -45,31 +45,37 @@ def render_explanation_tab() -> None:
         st.write(stage["summary"])
         for item in stage["details"]:
             st.write(f"- {item}")
+        if stage.get("paper_note"):
+            st.info(f"**This demo:** {stage['paper_note']}")
         st.markdown("</div>", unsafe_allow_html=True)
 
     with col_right:
         st.markdown("### Source paper")
         st.link_button(PAPER_TITLE, PAPER_URL)
 
-        st.markdown("### What the paper contributes")
-        st.write(
-            "The paper presents a three-stage hyperchaos-based image encryption pipeline using 6D, 8D and 9D systems, dynamic S-box generation, XOR-based protection, and FPGA implementation for strong speed gains."
+        st.markdown("### What the paper actually does")
+        st.markdown(
+            "The paper proposes a **three-stage hyperchaos-based image encryption algorithm** implemented on FPGA:\n\n"
+            "- **6D hyperchaotic system** drives the diffusion stage via XOR mixing, destroying pixel-level correlations\n"
+            "- **8D hyperchaotic system** generates a permutation matrix to spatially shuffle pixel positions\n"
+            "- **9D hyperchaotic system** produces a dynamic S-box for nonlinear byte substitution\n\n"
+            "Higher-dimensional chaotic systems have more positive Lyapunov exponents, making them significantly "
+            "harder to reconstruct than standard 3D or 4D chaotic maps. The FPGA implementation runs the three ODE "
+            "solvers in parallel, achieving real-time encryption throughput."
         )
 
-        st.markdown("### Why this demo adds more portfolio value")
-        st.write(
-            "Instead of only replicating equations and reporting security metrics, this application turns the idea into an explainable, interactive, and product-facing system."
-        )
+        st.markdown("### What this demo keeps and what it changes")
+        st.markdown(f"*Why:* {ADAPTATION_NOTES['why']}")
+        col_k, col_c = st.columns(2)
+        with col_k:
+            st.markdown("**✓ Kept from paper**")
+            for item in ADAPTATION_NOTES["kept"]:
+                st.write(f"- {item}")
+        with col_c:
+            st.markdown("**↻ Changed for software**")
+            for item in ADAPTATION_NOTES["changed"]:
+                st.write(f"- {item}")
 
-        st.markdown("### Possible use cases")
+        st.markdown("### Practical use cases")
         for item in USE_CASES:
             st.markdown(f'<span class="tag">{item}</span>', unsafe_allow_html=True)
-
-    st.markdown("### Disruptive angle")
-    for point in DISRUPTIVE_ANGLE:
-        st.write(f"- {point}")
-
-    st.markdown("### Recommended pitch")
-    st.write(
-        "VisionShield AI is a privacy-preserving visual protection system inspired by advanced chaos-based image encryption research. It demonstrates how secure imaging ideas can be transformed into a product-ready, explainable AI portfolio artifact."
-    )

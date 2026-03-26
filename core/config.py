@@ -1,20 +1,16 @@
 APP_TITLE = "VisionShield AI"
 
 APP_SUBTITLE = (
-    "A privacy-preserving visual protection demo inspired by multi-stage "
-    "chaos-based image encryption research. This version adds stronger image "
-    "processing, selective protection modes, analysis views, and an explanation "
-    "workspace designed for portfolio storytelling."
+    "A software adaptation of a hyperchaos-based image encryption paper. "
+    "Three-stage pipeline — diffusion, permutation, substitution — "
+    "with configurable inputs, per-stage visualization, and measurable security metrics."
 )
 
 PAPER_TITLE = "FPGA Realization of a Novel Hyperchaos Augmented Image Encryption Algorithm"
 PAPER_URL = "https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/cdt2/6416727"
 
-APP_DESCRIPTION = """
-VisionShield AI reinterprets the paper as a product-oriented privacy system.
-
-Instead of presenting image encryption as an isolated academic reproduction,
-this application turns the idea into a stronger portfolio artifact: an explainable,
-interactive, privacy-aware visual protection pipeline with analysis, flow breakdown,
-and practical product framing.
-"""
+APP_DESCRIPTION = (
+    "The paper proposes a three-stage encryption pipeline driven by 6D, 8D, and 9D hyperchaotic systems. "
+    "This application adapts those ideas into an interactive software pipeline, making the algorithm "
+    "inspectable at each stage and measurable through standard cryptographic metrics."
+)
